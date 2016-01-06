@@ -10,7 +10,7 @@
 include 'inc/init.php';
 
 
-$page->title = "Validate account";
+$page->title = "Aktivuoti paskyra";
 
 
 
@@ -18,13 +18,13 @@ if(isset($_GET['username']) && isset($_GET['key'])) {
 
 	if($u = $db->getRow("SELECT `userid` FROM `".MLS_PREFIX."users` WHERE `username` = ?s AND `validated` = ?s", $_GET['username'], $_GET['key'])) { 
 		if($db->query("UPDATE `".MLS_PREFIX."users` SET `validated` = '1' WHERE `userid` = ?i", $u->userid)) {
-			$page->success = "Your account was successfully activated !";
+			$page->success = "Jūsu paskyra buvo aktivuota !";
 			$user = new User($db);
 			$_SESSION['user'] = $u->userid;
 		} else
-			$page->error = "Some error camed up !";
+			$page->error = "Aktivuojant ivyko klaida !";
 	} else 
-		$page->error = "Error ! Incorrect key !";
+		$page->error = "Klaida ! Neteisingas raktas !)";
 	
 
 
